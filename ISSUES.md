@@ -19,7 +19,7 @@ $V_{1}(t) = \frac{V_{s}}{1+\frac{V_{s}-V_0}{V_0} *e^{-t\alpha_{1}}}$
 
 With $\alpha_{1}$ defined as:
 
-\alpha_{1} = -\frac{1}{t}ln((\frac{V_{s}}{V_{s}-\varepsilon}-1)(\frac{V_{0}}{V_{s}-V_{0}}))
+$\alpha_{1} = -\frac{1}{t}ln((\frac{V_{s}}{V_{s}-\varepsilon}-1)(\frac{V_{0}}{V_{s}-V_{0}}))$
 
 For deceleration, we are using:
 
@@ -27,7 +27,7 @@ $V_{2}(t) = \frac{V_{s}}{1+\frac{V_{s}-V_{0}}{V_0} *e^{-t\alpha_{2}}}$
 
 With $\alpha_{2}$ defined as:
 
-\alpha_{2} = -\frac{1}{t}ln((\frac{V_{s}}{V_{s}+\varepsilon}-1)(\frac{V_{0}}{V_{s}-V_{0}}))
+$\alpha_{2} = -\frac{1}{t}ln((\frac{V_{s}}{V_{s}+\varepsilon}-1)(\frac{V_{0}}{V_{s}-V_{0}}))$
 
 Where $t$ is time in seconds, $V_{s}$ is the set velocity, $V_{0}$ is the initial velocity, and $\varepsilon$ is the single precision machine epsilon.
 
