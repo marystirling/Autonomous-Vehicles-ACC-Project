@@ -55,11 +55,14 @@ We are pursuing further advice regarding a solution to this, as we are unsure of
 Algorithmically populate the mesh in the form of a logistic function over TIME
 Interpolate for the desired interval, then take the derivative of the resulting function for acceleration over time.
 Integrate subroutine SAFE such that:
+
 SAFE polls TIME-GAP TAU
-IF TAU < 0
-	RETURN TRUE
-ELSE
-	RETURN FALSE
+
+	IF TAU < 0
+		RETURN TRUE
+	ELSE
+		RETURN FALSE
+ 
 Where the returned value either allows for continued acceleration (0) or breaks acceleration (1), calling for deceleration from current point.
 This nets -
 A smooth polynomial such that V(t) exists and is valid over time 0-n (thus avoiding Runge phenomenon complications) in the desired form, where V'(t) shows the acceleration in m/s.
