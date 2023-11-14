@@ -6,7 +6,8 @@
 ### Table of Contents
 - [Prelude](#prelude)
 - [Jerk](#jerk)
-- [Precision](#precision)
+- [Precision](#precision-and-singularity)
+- [NOTE](#note)
 
 ### Prelude
 This is the issue tracker for the project. Issues can be theorized or actual, and solutions should be proposed as they come along.
@@ -48,3 +49,26 @@ set and inital velocity, with a point set at the initial velocity and the graph 
 We are currently encountering an issue with the ego vehicle having a singularity at $t$ = 0.25, where the derivative becomes non-finite. We believe this to be because it is being fed an
 input of -0.5, which will in turn cause a asymptote at the point. We may also be encountering subtractive cancellation in our precision, which could lead to a massive amount of error.
 We are pursuing further advice regarding a solution to this, as we are unsure of the problem and unable to effectively diagnose it ourselves.
+
+### Note
+
+Algorithmically populate the mesh in the form of a logistic function over TIME
+Interpolate for the desired interval, then take the derivative of the resulting function for acceleration over time.
+Integrate subroutine SAFE such that:
+SAFE polls TIME-GAP TAU
+IF TAU < 0
+	RETURN TRUE
+ELSE
+	RETURN FALSE
+Where the returned value either allows for continued acceleration (0) or breaks acceleration (1), calling for deceleration from current point.
+This nets -
+A smooth polynomial such that V(t) exists and is valid over time 0-n (thus avoiding Runge phenomenon complications) in the desired form, where V'(t) shows the acceleration in m/s.
+A feedback loop contained in the subroutine to ensure safe acceleration.
+
+Issues -
+If time-gap is very small, acceleration still permitted. Hard code in a minimum bound.
+
+Graphically, we are establishing a dynamic linear upper bound on velocity with the subroutine such that if our velocity will cause a crash (time-gap becomes negative), it quits
+and decelerates back to a safe speed such that time-gap is approximately 0. 
+
+This is a new approach to this problem, rather than using the analytically solved equation or the temporary piecewise solution.
