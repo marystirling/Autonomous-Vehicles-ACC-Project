@@ -75,3 +75,5 @@ Graphically, we are establishing a dynamic linear upper bound on velocity with t
 and decelerates back to a safe speed such that time-gap is approximately 0. 
 
 This is a new approach to this problem, rather than using the analytically solved equation or the temporary piecewise solution.
+
+MATLAB has an integrated function interpn, with arg pchip that yields an interpolating polynomial.
