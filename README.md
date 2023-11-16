@@ -3,7 +3,7 @@
 ### TEST DRIVE:
 When running, the purpose of our project is to see if it can change the set speed with geographic positional information. For testing purposes, instead of relying on GPS and hard-coding this, we want to manually just input a new set speed. The command to do this while running our ros controller is this (changing out 50 for desired set speed:
 ```shell
-rostopic pub -r 10 /new_set_speed std_msgs/Int16 "data: 50"
+rostopic pub -r 10 /new_set_speed std_msgs/Float64 "data: 50"
 ```
 
 ### SIMULINK FILES
