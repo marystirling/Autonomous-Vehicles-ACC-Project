@@ -1,16 +1,12 @@
-function handler(V_0, V_S, V_C, V_R, T_g)
-old_time = sys.time()
-while sys.time() >= old_time + 0.1:
-	if (V_S != V_C): // maybe floor/ceil these? round to even?
-		accel(V_0, V_S, V_C, V_R, T_g);
-		old_time = sys.time()
+function handler(V_0, V_S, V_R, T_g)
+if (V_S != V_C): // maybe floor/ceil these? round to even?
+	accel(V_0, V_S, V_R, T_g);
 
 
-function accel(V_0, V_S, V_C, V_R, T_g, time?)
+function accel(V_0, V_S, V_R, T_g, time?)
 /*
 V_0 init vel
 V_S set vel
-V_C cur vel
 V_R rel vel
 T_g time gap
 time? -> can probably access sys time => no arg
@@ -20,14 +16,14 @@ encapsulated in handler loop that happens every 0.1s
 */
 if (T_g < 2):
 	return;
-if (V_s > V_c):
+if (V_s > V_0):
 accel = (set - cur) / 5 //arbitrary constant
 	if (safe(Tau)):
 		car.acceleration(accel)
 	else:
 		car.acceleration(0)
 		return;
-elif (V_s < V_c):
+elif (V_s < V_0):
 	decel = (set - cur) / 5
 	car.acceleration(decel)
 
@@ -42,7 +38,3 @@ if Tau < 2:
 	return False
 else
 	return True
-
-
-// pull epoch time MATLAB
-// X = convertTo(D,'epochtime','Epoch','2001-01-01','TicksPerSecond',1000)
