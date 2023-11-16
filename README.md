@@ -33,4 +33,10 @@
     catkin_make
     ```
 
-Now, you're all set up and ready to work with your ROS workspace within the Docker container. Enjoy your Autonomous Vehicle ACC project!
+### Simulink files
+
+1. ol_simulation.slx -> open loop simulation
+
+2. cl_simulation.slx -> closed loop simulation
+
+3. ros_controller.slx -> ros topics code generator
