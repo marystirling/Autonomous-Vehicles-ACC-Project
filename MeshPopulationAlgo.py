@@ -1,10 +1,10 @@
 import math
 
 def main():
-    time = 10          # time gap
+    time = 5          # time gap
     midpoint = time / 2 # describes midpoint of time
-    vs = 15            # set speed
-    v0 = 25            # initial speed
+    vs = 26.8             # set speed
+    v0 = 29             # initial speed
     if vs > v0:
         # accelerate
         mesh_data = []
@@ -62,7 +62,7 @@ def main():
         mesh_data = sec_mesh + mesh_data
         for i in range(int(time * 10)):
             print("(" + str(i * 0.1) + ", " + str(mesh_data[i]) + ")")
-    elif vs = v0:
+    elif vs == v0:
         print("Nothing to do!")
 
 
