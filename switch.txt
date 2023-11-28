@@ -1,0 +1,70 @@
+function main()
+    time = 5;          % time gap
+    midpoint = time / 2; % describes midpoint of time
+    vs = 26.8;             % set speed
+    v0 = 29;             % initial speed
+    mesh_data = [];
+    
+    if vs > v0
+        % accelerate
+        accel_mid = (vs - v0) / 2;
+        mesh_data = [accel_mid];
+        y_val = accel_mid;
+        % build first part of acceleration mesh
+        for i = 1:(midpoint * 10)
+            % scaling with time to ensure convergence
+            y_val = y_val / ((time + 1) / time);
+            mesh_data = [y_val, mesh_data];
+        end
+        % Reset variables, declare second half of mesh
+        y_val = accel_mid;
+        sec_mesh = [];
+        set_tmp = vs - v0;
+        % construct second half of acceleration mesh
+        for i = 1:(midpoint * 10)
+            % remove next smallest increment obtained from set speed
+            set_tmp = set_tmp - mesh_data(i);
+            sec_mesh = [set_tmp, sec_mesh];
+            set_tmp = vs - v0;
+        end
+        % concatenate meshes to form one mesh with h = 0.1
+        mesh_data = [mesh_data, sec_mesh];
+        for i = 1:(time * 10)
+            fprintf('(%f, %f)\n', (i-1) * 0.1, mesh_data(i));
+        end
+    elseif vs < v0
+        % decelerate
+        decel_mid = (v0 - vs) / 2;
+        mesh_data = [decel_mid];
+        y_val = decel_mid;
+        % build second half of mesh
+        for i = 1:(midpoint * 10)
+            % scale with time
+            y_val = y_val / ((time + 1) / time);
+            mesh_data = [mesh_data, y_val];
+        end
+        % Reset variables, init first half of mesh
+        y_val = decel_mid;
+        sec_mesh = [];
+        set_tmp = v0 - vs;
+        mesh_data = fliplr(mesh_data); % reversed to obtain smallest values first
+        % similar in construction to first
+        for i = 1:(midpoint * 10)
+            set_tmp = set_tmp - mesh_data(i);
+            sec_mesh = [sec_mesh, set_tmp];
+            set_tmp = v0-vs;
+        end
+        % Reversed such that it decays from midpoint again
+        mesh_data = fliplr(mesh_data);
+        % Concatenate meshes
+        mesh_data = [sec_mesh, mesh_data];
+        for i = 1:(time * 10)
+            fprintf('(%f, %f)\n', (i-1) * 0.1, mesh_data(i));
+        end
+    else
+        fprintf('Nothing to do!\n');
+    end
+end
+
+% Call the main function
+main()
